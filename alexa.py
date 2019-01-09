@@ -32,7 +32,7 @@ def alexa():
 
     # Intents will have some input, so we need to process it
     # Change the conversation state based on the message from the user
-    state, context, output1 = on_input(state, context, request_query)
+    state, context, output1 = on_input(state, request_query, context)
     if output1:
       output += output1 + '\n'
     print(f'Result ({state}, {context})')
