@@ -9,10 +9,12 @@ context = {}
 @app.route('/alexa', methods=['POST', 'GET'])
 def alexa():
   payload = request.get_json()
+  print(payload)
 
   request_type = payload['request']['type']
   if request_type == 'IntentRequest':
     query = payload['request']['intent']['slots']['query']['value']
+    print(query)
     response_text = 'You said: ' + query
   else:
     response_text = 'Say something!'
