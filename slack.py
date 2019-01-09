@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from bot import on_enter_state, on_input
 
 app = Flask(__name__)
@@ -23,7 +23,10 @@ def slack_event():
       # Enter the new state.
       output2 = on_enter_state(state, context)
 
-      return '\n'.join([x for x in [output1, output2] if x is not None])
+      return jsonify({
+        'in_channel': True,
+        'text': '\n'.join([x for x in [output1, output2] if x is not None])
+      })
 
   return ''
 
