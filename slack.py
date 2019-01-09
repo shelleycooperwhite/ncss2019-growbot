@@ -6,7 +6,7 @@ app = Flask(__name__)
 state = 'NO QUERY'
 context = {}
 
-@app.route('/slack/event', methods=['GET', 'POST'])
+@app.route('/slack/slash', methods=['GET', 'POST'])
 def slack_event():
   global state, context
 
