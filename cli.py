@@ -1,10 +1,10 @@
 from bot import on_enter_state, on_input
 
 state = 'NO QUERY'
-data = None
+context = None
 
 while state != 'END':
-  on_enter_state(state, data)
+  on_enter_state(state, context)
 
   text = input('> ')
-  state, data = on_input(state, text, data)
+  state, context = on_input(state, text, context)

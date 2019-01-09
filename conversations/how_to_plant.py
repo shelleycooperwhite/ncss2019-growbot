@@ -11,7 +11,7 @@ def how_to_plant_on_input(text, data):
   # If we don't understand, let them know and try this state again.
   else:
     print('Hmm, I don\'t know about that type of seed.')
-    return 'HOW TO PLANT', None
+    return 'HOW TO PLANT', {}
 
 
 # How to plant
@@ -21,4 +21,4 @@ def how_to_plant_seed_on_enter_state(data):
   print('Here are the instructions for planting ' + seed + '! blah blah blah etc')
 
 def how_to_plant_seed_on_input(data):
-  return 'NO QUERY', None
+  return 'NO QUERY', {}
