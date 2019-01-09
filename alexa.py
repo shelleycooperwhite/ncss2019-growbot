@@ -24,8 +24,7 @@ def alexa():
 
   # We are starting, so we should reset the state
   if request_type == 'LaunchRequest':
-    state = 'NO_QUERY'
-    context = None
+    state, context = 'START', {}
     print('Launched, resetting state')
 
   elif request_type == 'IntentRequest':
@@ -33,26 +32,35 @@ def alexa():
 
     # Intents will have some input, so we need to process it
     # Change the conversation state based on the message from the user
-
-    state, context, output = on_input(state, context, request_query)
+    state, context, output1 = on_input(state, context, request_query)
+    if output1:
+      output += output1 + '\n'
     print(f'Result ({state}, {context})')
+
+    # The special 'END' state here should reset the bot, so that the
+    # next slash command is back at the start.
+    if state == 'END':
+      state, context = 'START', {}
+      return alexa_response("Thanks for the chat!", shouldEndSession=True)
 
   # Do something based on the state
   print(f'Starting on enter ({state}, {context})')
-  on_enter_state(state, context)
+  output += on_enter_state(state, context)
 
   # Build our response
   print(f'Giving response {output}')
+  return alexa_response(output)
 
+def alexa_response(text, shouldEndSession=False):
   return jsonify({
     'version': '0.1',
     'response': {
       'outputSpeech': {
-        'type': 'PlainText',
-        'text': output
+        'type': 'SSML',
+        'ssml': f"""<speak><voice name="Russell">{text}</voice></speak>"""
       },
-      'shouldEndSession': False,
-    },
+      'shouldEndSession': shouldEndSession
+    }
   })
 
 if __name__ == '__main__':
