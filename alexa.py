@@ -9,6 +9,7 @@ context = {}
 @app.route('/alexa', methods=['POST', 'GET'])
 def alexa():
   global state, context
+  output = ''
   payload = request.get_json()
   print(payload)
 
@@ -34,10 +35,10 @@ def alexa():
     # Change the conversation state based on the message from the user
 
     state, context, output = on_input(state, context, request_query)
-    print(f'Result ({state}, {data})')
+    print(f'Result ({state}, {context})')
 
   # Do something based on the state
-  print(f'Starting on enter ({state}, {data})')
+  print(f'Starting on enter ({state}, {context})')
   on_enter_state(state, context)
 
   # Build our response
