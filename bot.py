@@ -10,11 +10,11 @@ def no_query_on_enter_state(context):
 
 def no_query_on_input(text, context):
   # No data provided
-  if text == 'how do I plant seeds':
+  if text.lower().endswith('plant seeds'):
     return 'HOW TO PLANT', {}, None
 
   # Seed data provided
-  elif text == 'how do I plant tomato seeds':
+  elif text.lower().endswith('plant tomato seeds'):
     return 'HOW TO PLANT SEED', {'seed': 'tomato'}, None
 
   # If we don't know what they're talking about, go to no query
