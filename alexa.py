@@ -24,7 +24,7 @@ def alexa():
 
   # We are starting, so we should reset the state
   if request_type == 'LaunchRequest':
-    state, context = 'START', {}
+    state, context = 'NO QUERY', {}
     print('Launched, resetting state')
 
   elif request_type == 'IntentRequest':
@@ -40,7 +40,7 @@ def alexa():
     # The special 'END' state here should reset the bot, so that the
     # next slash command is back at the start.
     if state == 'END':
-      state, context = 'START', {}
+      state, context = 'NO QUERY', {}
       return alexa_response("Thanks for the chat!", shouldEndSession=True)
 
   # Do something based on the state
