@@ -4,7 +4,11 @@ state = 'NO QUERY'
 context = None
 
 while state != 'END':
-  on_enter_state(state, context)
+  output = on_enter_state(state, context)
+  if output:
+    print(output)
 
   text = input('> ')
-  state, context = on_input(state, text, context)
+  state, context, output = on_input(state, text, context)
+  if output:
+    print(output)

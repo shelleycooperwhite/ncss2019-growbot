@@ -6,22 +6,20 @@ Common states
 """
 
 def no_query_on_enter_state(context):
-  print('How can I help?')
+  return 'How can I help?'
 
 def no_query_on_input(text, context):
   # No data provided
   if text == 'how do I plant seeds':
-    return 'HOW TO PLANT', {}
+    return 'HOW TO PLANT', {}, None
 
   # Seed data provided
   elif text == 'how do I plant tomato seeds':
-    return 'HOW TO PLANT SEED', {'seed': 'tomato'}
+    return 'HOW TO PLANT SEED', {'seed': 'tomato'}, None
 
   # If we don't know what they're talking about, go to no query
   else:
-    print('I don\'t know that command yet!')
-    print('One day I will suggest some things you can do.')  # todo
-    return 'NO QUERY', {}
+    return 'NO QUERY', {}, 'I don\'t know that command yet!\nOne day I will suggest some things you can do.' # todo
 
 
 """
@@ -39,12 +37,12 @@ def on_enter_state(state, context):
     return how_to_plant.how_to_plant_seed_on_enter_state(context)
 
   else:
-    return 'END', {}
+    return 'END', {}, 'Bye!'
 
 def on_input(state, text, context):
   # If they're trying to quit, then quit.
   if text == 'quit':
-    return 'END', {}
+    return 'END', {}, 'Bye!'
 
   # Otherwise, do the state thing.
   if state == 'NO QUERY':
@@ -58,4 +56,4 @@ def on_input(state, text, context):
     return no_query_on_input(text, context)
 
   else:
-    return 'END', {}
+    return 'END', {}, 'Bye!'
