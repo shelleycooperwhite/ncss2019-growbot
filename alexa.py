@@ -25,9 +25,9 @@ def alexa():
       'outputSpeech': {
         'type': 'PlainText',
         'text': response_text
-      }
+      },
+      'shouldEndSession': False,
     },
-    'shouldEndSession': False,
   })
 
 if __name__ == '__main__':
